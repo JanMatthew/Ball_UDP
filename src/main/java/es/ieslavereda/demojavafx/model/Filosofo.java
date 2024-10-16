@@ -50,23 +50,33 @@ public class Filosofo {
                     tdr = tizq;
                 }
                 synchronized (tiz){
-                    updateValue(new RegionColor(tiz.getLabel(),Color.YELLOW));
-                    updateValue(new RegionColor(label, Color.YELLOW));
+                    updateValue(new RegionColor(tiz.getLabel(),Color.RED));
+                    Thread.sleep(1);
+                    updateValue(new RegionColor(label, Color.RED));
+                    Thread.sleep(1);
                     synchronized (tdr){
+                        updateValue(new RegionColor(tdr.getLabel(), Color.RED));
+                        Thread.sleep(1);
                         updateValue(new RegionColor(tdr.getLabel(), Color.GREEN));
+                        Thread.sleep(1);
                         updateValue(new RegionColor(tiz.getLabel(), Color.GREEN));
+                        Thread.sleep(1);
                         updateValue(new RegionColor(label, Color.GREEN));
-                        Thread.sleep(2000);
-                    }
-                    updateValue(new RegionColor(tdr.getLabel(), Color.YELLOW));
-                    updateValue(new RegionColor(label, Color.YELLOW));
-                }
-                updateValue(new RegionColor(tdr.getLabel(),Color.WHITE));
-                updateValue(new RegionColor(tiz.getLabel(), Color.WHITE));
-                updateValue(new RegionColor(label, Color.RED));
+                        Thread.sleep(3000);
+                        updateValue(new RegionColor(tdr.getLabel(),Color.WHITE));
+                        Thread.sleep(1);
+                        updateValue(new RegionColor(tiz.getLabel(), Color.WHITE));
+                        Thread.sleep(1);
 
-                Thread.sleep(2000);
+                    }
+                }
+
+                updateValue(new RegionColor(label, Color.BLUE));
+
+                Thread.sleep(5000);
+
                 updateValue(new RegionColor(label, Color.WHITE));
+
             }
         }
     }
