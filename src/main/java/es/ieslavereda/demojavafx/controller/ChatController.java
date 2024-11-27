@@ -21,7 +21,7 @@ public class ChatController {
 
     @FXML
     protected void onStartButtonClick(){
-        Usuario u = new Usuario(enterChat,btnSend,chat,enterChat.getText());
+        Usuario u = new Usuario(enterChat,btnSend,chat,"Matthew");
         u.start();
     }
     @FXML

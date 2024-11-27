@@ -1,13 +1,11 @@
 package es.ieslavereda.demojavafx.Chat;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -19,6 +17,7 @@ public class Usuario {
     private TextField enterChat;
     private Button send;
     private TextArea chat;
+    private PrintWriter pw;
 
     public Usuario(TextField enterChat, Button send, TextArea chat,String name) {
         this.host = "127.0.0.1";
@@ -44,8 +43,21 @@ public class Usuario {
             socket = new Socket(host,port);
             Thread lectura = new Thread(new LecturaThread(socket,chat));
             lectura.start();
-            Thread escritura = new Thread(new EscrituraThread(socket,enterChat,name));
-            escritura.start();
+            try {
+                pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+
+
+                send.setOnAction(event -> {
+                    String mensajeTexto = enterChat.getText().trim();
+                    if (!mensajeTexto.isEmpty()) {
+                        String mensaje = "[" + name + "] " + mensajeTexto;
+                        pw.println(mensaje);
+                        enterChat.clear();
+                    }
+                });
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
         }catch (IOException e){
             e.printStackTrace();
         }
