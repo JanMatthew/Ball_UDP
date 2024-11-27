@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="314.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ieslavereda.demojavafx.controller.ExampleTaskJFXController">
+<GridPane prefHeight="112.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ieslavereda.demojavafx.controller.HelloController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="NEVER" maxWidth="94.0" minWidth="10.0" prefWidth="14.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="133.0" minWidth="10.0" prefWidth="42.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="153.0" minWidth="4.0" prefWidth="4.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="334.0" minWidth="10.0" prefWidth="334.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="94.0" minWidth="10.0" prefWidth="16.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="14.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+   </rowConstraints>
    <children>
    
-                            <Label fx:id="t5" layoutX="63.0" layoutY="69.0" text="Tenedor5" />
-      <Label fx:id="t4" layoutX="42.0" layoutY="194.0" text="Tenedor4" />
-      <Label fx:id="t2" layoutX="312.0" layoutY="194.0" text="Tenedor2" />
-      <Label fx:id="f5" layoutX="14.0" layoutY="133.0" text="Filosofo5" />
-      <Label fx:id="f4" layoutX="87.0" layoutY="257.0" text="Filosofo4" />
-      <Label fx:id="f3" layoutX="261.0" layoutY="257.0" text="Filosofo3" />
-      <Label fx:id="t1" layoutX="290.0" layoutY="69.0" text="Tenedor1" />
-      <Label fx:id="f1" layoutX="176.0" layoutY="28.0" text="Filosofo1" />
-      <Label fx:id="t3" layoutX="174.0" layoutY="272.0" text="Tenedor3" />
-      <Label fx:id="f2" layoutX="335.0" layoutY="133.0" text="Filosofo2" />
+          <Label fx:id="welcomeText" GridPane.columnIndex="1" />
+       <Button fx:id="btnStart" onAction="#onHelloButtonClick" text="Start" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+      <ProgressBar fx:id="pbLiebre" prefWidth="400.0" progress="0.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+      <ProgressBar fx:id="pbTortuga" prefWidth="400.0" progress="0.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+      <ImageView fitHeight="99.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+         <image>
+            <Image url="@tortuga.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
+         <image>
+            <Image url="@liebre.png" />
+         </image>
+      </ImageView>
    </children>
-</AnchorPane>
+</GridPane>
