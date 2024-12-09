@@ -7,11 +7,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class SalaThread implements Runnable {
     private Socket socket;
-    public SalaThread(Socket socket) {
+    private GestoPrintWriter gestoPrintWriter;
+    public SalaThread(Socket socket, GestoPrintWriter gestoPrintWriter) {
         this.socket = socket;
+        this.gestoPrintWriter = gestoPrintWriter;
     }
 
 
@@ -22,7 +27,9 @@ public class SalaThread implements Runnable {
             String line;
             PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
             while ((line = br.readLine()) != null) {
-                pw.println(line);
+                for (PrintWriter printWriter : gestoPrintWriter.getPrintWriterSet()) {
+                    printWriter.println(line);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
