@@ -9,9 +9,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.control.TextFormatter;
+
 
 import java.net.ServerSocket;
+import java.net.URL;
 import java.nio.file.attribute.FileAttribute;
+
+
 
 public class ChatController {
     @FXML
@@ -31,6 +36,15 @@ public class ChatController {
     @FXML
     private TextField port;
 
+    
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Restringe la entrada del campo 'port' a solo números
+        port.setTextFormatter(new TextFormatter<>(change -> 
+            (change.getControlNewText().matches("\\d*")) ? change : null
+        ));
+    }
+    
     @FXML
     protected void onStartButtonClick(){
         if (userName.getText().isEmpty()) {
