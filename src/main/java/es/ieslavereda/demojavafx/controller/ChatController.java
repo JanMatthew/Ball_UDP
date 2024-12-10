@@ -47,6 +47,8 @@ public class ChatController {
     
     @FXML
     protected void onStartButtonClick(){
+        
+
         if (userName.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Campo requerido");
@@ -69,21 +71,35 @@ public class ChatController {
             alert.showAndWait();
         }
         else {
-
-
-            Usuario u = new Usuario(host.getText(),Integer.parseInt(port.getText()),enterChat, btnSend, chat, userName.getText());
-            u.start();
-            if (u.getConnected()){
-                btnStart.setDisable(true);
-                userName.setDisable(true);
-                online.setFill(Paint.valueOf("#3dff21"));
+            Integer puerto = null;
+            try{
+                puerto = Integer.parseInt(port.getText());
+            }catch(Exception e){
+                
+            }
+            if(puerto == null){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Puerto no valido");
+                alert.setHeaderText("Port introducido no valido");
+                alert.setContentText("Por favor, ingrese el port de nuevo.");
+                alert.showAndWait();
             }
             else{
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Error Conexion");
-                alert.setHeaderText("Ha habido un erro de Conexion");
-                alert.setContentText("No se ha podido conectar con el host o el puerto que ha introducido, pruebe otro");
-                alert.showAndWait();
+
+                Usuario u = new Usuario(host.getText(),puerto,enterChat, btnSend, chat, userName.getText());
+                u.start();
+                if (u.getConnected()){
+                    btnStart.setDisable(true);
+                    userName.setDisable(true);
+                    online.setFill(Paint.valueOf("#3dff21"));
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Error Conexion");
+                    alert.setHeaderText("Ha habido un erro de Conexion");
+                    alert.setContentText("No se ha podido conectar con el host o el puerto que ha introducido, pruebe otro");
+                    alert.showAndWait();
+                }
             }
 
         }
