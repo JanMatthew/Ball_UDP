@@ -9,14 +9,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.scene.control.TextFormatter;
-
 
 import java.net.ServerSocket;
-import java.net.URL;
 import java.nio.file.attribute.FileAttribute;
-
-
 
 public class ChatController {
     @FXML
@@ -36,19 +31,8 @@ public class ChatController {
     @FXML
     private TextField port;
 
-    
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Restringe la entrada del campo 'port' a solo números
-        port.setTextFormatter(new TextFormatter<>(change -> 
-            (change.getControlNewText().matches("\\d*")) ? change : null
-        ));
-    }
-    
     @FXML
     protected void onStartButtonClick(){
-        
-
         if (userName.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Campo requerido");
@@ -74,32 +58,30 @@ public class ChatController {
             Integer puerto = null;
             try{
                 puerto = Integer.parseInt(port.getText());
-            }catch(Exception e){
-                
-            }
-            if(puerto == null){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Puerto no valido");
-                alert.setHeaderText("Port introducido no valido");
-                alert.setContentText("Por favor, ingrese el port de nuevo.");
-                alert.showAndWait();
-            }
-            else{
+            }catch(Exception e) {
 
-                Usuario u = new Usuario(host.getText(),puerto,enterChat, btnSend, chat, userName.getText());
+            }
+            if(puerto!=null) {
+                Usuario u = new Usuario(host.getText(), Integer.parseInt(port.getText()), enterChat, btnSend, chat, userName.getText());
                 u.start();
-                if (u.getConnected()){
+                if (u.getConnected()) {
                     btnStart.setDisable(true);
                     userName.setDisable(true);
                     online.setFill(Paint.valueOf("#3dff21"));
-                }
-                else{
+                } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error Conexion");
                     alert.setHeaderText("Ha habido un erro de Conexion");
                     alert.setContentText("No se ha podido conectar con el host o el puerto que ha introducido, pruebe otro");
                     alert.showAndWait();
                 }
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Campo requerido");
+                alert.setHeaderText("Port no es un numero");
+                alert.setContentText("Por favor, ingrese el port.");
+                alert.showAndWait();
             }
 
         }
