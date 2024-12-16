@@ -5,12 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ChatXApplication extends Application {
+public class ServerXApplication extends Application {
     @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(ChatXApplication.class.getResource("chat.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Chat");
+    public void start(Stage stage) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(ServerXApplication.class.getResource("bola.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),800,800);
+        stage.setTitle("Server");
         stage.setScene(scene);
         stage.show();
     }
