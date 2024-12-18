@@ -12,12 +12,12 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="ball" fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ball" fitHeight="85.0" fitWidth="85.0" layoutX="200.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@pelota.png" />
                </image>
             </ImageView>
-            <Button fx:id="connect" layoutX="515.0" layoutY="329.0" mnemonicParsing="false" text="Connect" onAction="#onConnButtonClick" />
+            <Button fx:id="connect" layoutX="515.0" layoutY="329.0" mnemonicParsing="false" onAction="#onConnButtonClick" text="Connect" />
             <TextField fx:id="host" layoutX="235.0" layoutY="329.0" />
             <TextField fx:id="port" layoutX="419.0" layoutY="329.0" prefHeight="24.0" prefWidth="82.0" />
             <Text layoutX="235.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOST" />

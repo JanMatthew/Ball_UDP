@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BallServer implements Runnable{
-    private static int x,y,deg=0,velX=2,velY=2,lastVelX,lastVelY;
+
+    private static int x=215,y=113,deg=0,velX=2,velY=2,lastVelX,lastVelY;
     private final static int MAX_BYTES = 1400;
     private final static String COD_TEXTO = "UTF-8";
     private final static int PUERTO = 50000;
@@ -23,8 +24,6 @@ public class BallServer implements Runnable{
     public BallServer(Button play,ImageView ball) {
         this.ball = ball;
         this.play = play;
-        x = (int) ball.getX();
-        y = (int) ball.getY();
     }
     @Override
     public void run() {
@@ -32,10 +31,12 @@ public class BallServer implements Runnable{
             new Thread(() -> {
                 while (true) {
                     try {
-                        System.out.println(String.valueOf(x) + "," + String.valueOf(y));
-                        Platform.runLater(() -> {ball.relocate(x, y);
-                            ball.setRotate(deg);});
-                        String pos = String.valueOf(x) + "," + String.valueOf(y);
+                        System.out.println(String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(deg));
+                        Platform.runLater(() -> {
+                            ball.relocate(x, y);
+                            ball.setRotate(deg);
+                        });
+                        String pos = String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(deg);
                         byte[] b = String.valueOf(pos).getBytes(COD_TEXTO);
                         for(InetSocketAddress cliente : clientes){
                             DatagramPacket packetSpam = new DatagramPacket(b,
@@ -58,14 +59,12 @@ public class BallServer implements Runnable{
                     lastVelY = velY;
                     velX = 0;
                     velY = 0;
-                    deg = 0;
                     play.setText("play");
                 }
                 else{
                     velX = lastVelX;
                     velY = lastVelY;
                     play.setText("stop");
-                    deg = 1;
                 }
 
             });
@@ -74,9 +73,16 @@ public class BallServer implements Runnable{
                 byte[] datosRecibidos = new byte[MAX_BYTES];
                 DatagramPacket packetRecibido = new DatagramPacket(datosRecibidos,datosRecibidos.length);
                 serverSocket.receive(packetRecibido);
-                System.out.println("Usuario recibido");
-                clientes.add(new InetSocketAddress(packetRecibido.getAddress(),packetRecibido.getPort()));
-                System.out.println("Empezando ataque");
+                String mensaje = new String(packetRecibido.getData(),0,packetRecibido.getLength(),COD_TEXTO);
+                System.out.printf("mensaje: %s",mensaje);
+                if(mensaje.equals("DISCONNECT")){
+                    System.out.println(clientes.remove(new InetSocketAddress(packetRecibido.getAddress(),packetRecibido.getPort())));
+                }
+                else {
+                    System.out.println("Usuario recibido");
+                    clientes.add(new InetSocketAddress(packetRecibido.getAddress(), packetRecibido.getPort()));
+                    System.out.println("Empezando ataque");
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -86,15 +92,18 @@ public class BallServer implements Runnable{
         x += velX;
         y += velY;
 
-        if (x <= 0 || x >= 800) {
+        if (x <= 0 || x >= 598-ball.getFitWidth()) {
             velX *= -1; // Cambia la dirección horizontal
             x += velX;
 
         }
-        if (y <= 0 || y >= 800) {
+        if (y <= 0 || y >= 375-ball.getFitHeight()) {
             velY *= -1; // Cambia la dirección vertical
             y += velY;
         }
-        deg+=1;
+        if(velX != 0 ){
+            deg += velX > 0 ? 1 : -1;
+        }
     }
+
 }

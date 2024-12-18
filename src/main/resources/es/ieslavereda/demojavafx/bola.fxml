@@ -8,14 +8,14 @@
 
 <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="untitled" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ieslavereda.demojavafx.controller.ServerController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="529.0">
          <children>
-            <ImageView fx:id="ball" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ball" fitHeight="85.0" fitWidth="85.0" layoutX="256.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pelota.png" />
                </image>
             </ImageView>
-            <Button fx:id="play" layoutX="400.0" layoutY="400.0" mnemonicParsing="false" onAction="#onPlayButtonClick" text="START" />
+            <Button fx:id="play" layoutX="268.0" layoutY="325.0" mnemonicParsing="false" onAction="#onPlayButtonClick" text="START" />
          </children></AnchorPane>
   </content>
 </TitledPane>

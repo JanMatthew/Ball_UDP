@@ -9,7 +9,7 @@ public class UserXApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(ServerXApplication.class.getResource("bolaUser.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),800,600);
+        Scene scene = new Scene(fxmlLoader.load(),598,375);
         stage.setTitle("User");
         stage.setScene(scene);
         stage.show();

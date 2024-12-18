@@ -16,6 +16,7 @@ public class ServerController {
         BallServer bs = new BallServer(play,ball);
         Thread t = new Thread(bs);
         t.start();
+        System.out.printf("inicitioo");
     }
 //        BallServer bs = new BallServer(play,ball);
 //        bs.start();

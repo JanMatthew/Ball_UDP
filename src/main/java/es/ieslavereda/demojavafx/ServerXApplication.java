@@ -9,7 +9,7 @@ public class ServerXApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(ServerXApplication.class.getResource("bola.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),800,800);
+        Scene scene = new Scene(fxmlLoader.load(),598,375);
         stage.setTitle("Server");
         stage.setScene(scene);
         stage.show();
